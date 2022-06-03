@@ -9,7 +9,7 @@ import { Checkbox } from 'primereact/checkbox';
 
 
 const TableDemo = () => {
-    
+
     const [loading1, setLoading1] = useState(true);
     const [loading2, setLoading2] = useState(true);
     const [proj, setProj] = useState(new Array());
@@ -20,7 +20,7 @@ const TableDemo = () => {
     const [id, setId] = useState("");
     const [checkboxValue, setCheckboxValue] = useState(selectedProject.active);
 
-    
+
 
 
     let projectService = new ProjectService();
@@ -37,7 +37,7 @@ const TableDemo = () => {
 
 
     useEffect(() => {
-        
+
         getAll();
     }, [updateProjectById]);
     //console.log(selectedProject)
@@ -53,6 +53,7 @@ const TableDemo = () => {
             .then(pro => {
                 setProj(pro);
                 setProject([...project].filter(pro => pro.id !== id));
+                alert("project deleted.")
                 getAll();
             });
     }
@@ -62,7 +63,7 @@ const TableDemo = () => {
             .then(pro => {
                 setUpdateProject(pro);
                 setProj([...proj]);
-                console.log(pro);
+                alert("project updated.")
             });
     }
 
@@ -76,24 +77,24 @@ const TableDemo = () => {
 
         return <Button onClick={() => { setSelectedProject(rowData); setId(rowData.id); setCheckboxValue(rowData.active) }} label='Update' className='mr-2 mb-2'></Button>
     }
-    
+
 
     //console.log(selectedProject);
 
     function handleInputChange(event) {
         const { name, value } = event.target;
-        let newProject = { ...selectedProject};
-        if(name == "active"){
-            setCheckboxValue(o=>!o);
+        let newProject = { ...selectedProject };
+        if (name == "active") {
+            setCheckboxValue(o => !o);
             newProject["active"] = !checkboxValue;
         }
-        else{
+        else {
             newProject[name] = value;
         }
-        
-       
+
+
         setSelectedProject(newProject);
-        
+
     }
 
     return (
@@ -119,16 +120,21 @@ const TableDemo = () => {
                         <label htmlFor="endDate">End Date</label>
                         <InputText name='endDate' type="date" id='endDate' value={selectedProject.endDate} onChange={(event) => handleInputChange(event)} ></InputText>
                     </div>
+                    <div className="offer">
+                        <label htmlFor="offer">Offer</label>
+                        <InputText name='offer' id='offer' value={selectedProject.offer} onChange={(event) => handleInputChange(event)} ></InputText>
+                    </div>
                     <div className="status">
-                    <h5>Status</h5>
-                    <div className="grid">
-                        <div className="col-12 md:col-4">
-                            <div className="field-checkbox">
-                            <Checkbox id='active' name="active"  onChange={(event)=> handleInputChange(event)} checked={checkboxValue}></Checkbox>
+
+                        <div className="grid">
+                            <div className="col-12 md:col-4">
+                                <div className="field-checkbox">
+                                    <Checkbox id='active' name="active" onChange={(event) => handleInputChange(event)} checked={checkboxValue}></Checkbox>
+                                    <label htmlFor="offer">Active</label>
+                                </div>
                             </div>
                         </div>
-                        </div>
-                        </div>
+                    </div>
                     <div className='addButtonDiv'>
                         <Button onClick={(event) => updateProjectById(event, id)} className='project-button'>
                             Update
@@ -138,8 +144,8 @@ const TableDemo = () => {
                 </div>
                 <div className="card">
                     <h5>Project List</h5>
-                    <DataTable  value={project} paginator className="p-datatable-gridlines" showGridlines rows={10}
-                        dataKey="id" filterDisplay="menu"  responsiveLayout="scroll"
+                    <DataTable value={project} paginator className="p-datatable-gridlines" showGridlines rows={10}
+                        dataKey="id" filterDisplay="menu" responsiveLayout="scroll"
                         emptyMessage="No Project found.">
                         <Column field="projectName" header="Name" filter filterPlaceholder="Search by Project Name" style={{ minWidth: '12rem' }} sortable />
                         <Column field="startDate" header="Start Date" style={{ minWidth: '12rem' }} filter filterPlaceholder="Search by Start Date" sortable

@@ -1,38 +1,40 @@
-const BASE_URL =
-"http://localhost:7070/project";
+import Axios from "axios";
 
-export default class ProjectService{
-   
+const BASE_URL =
+    "http://localhost:8082/project";
+
+export default class ProjectService {
+
 
 
     addProject = async (pro) => {
-        return fetch(BASE_URL+'/addProject',{
-            method: "POST",
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(pro)
-        }).then(response => response.json())
+        let data = JSON.stringify(pro);
+        let headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+        return Axios.post(BASE_URL + '/addProject', data,{headers}).then(response => response.data).catch(function (error) {
+            console.log(error);
+        })
     }
 
     getAllProjects = async () => {
-        return fetch(BASE_URL+"/getAll",{
+        return fetch(BASE_URL + "/getAll", {
             headers: {
                 "Accept": "application/json"
             }
-        }).then( res => res.json());
+        }).then(res => res.json());
     }
 
     getById = async (id) => {
-        return fetch(BASE_URL+"/getById/"+id,{
+        return fetch(BASE_URL + "/getById/" + id, {
             headers: {
                 "Accept": "application/json"
             }
-        }).then( res => res.json());
+        }).then(res => res.json());
     }
-    updateProjectbyId(bk,id) {
-        return fetch(`${BASE_URL+"/updateProject"}/${id}`,{
+    updateProjectbyId(bk, id) {
+        return fetch(`${BASE_URL + "/updateProject"}/${id}`, {
             method: "PUT",
             headers: {
                 "Accept": "application/json",
@@ -42,7 +44,7 @@ export default class ProjectService{
         }).then(response => response.json())
     }
     deleteProject = async (id) => {
-        return fetch(`${BASE_URL}/${id}`,{
+        return fetch(`${BASE_URL}/${id}`, {
             method: "DELETE",
             headers: {
                 "Accept": "application/json"

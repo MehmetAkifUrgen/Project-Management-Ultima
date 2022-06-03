@@ -65,7 +65,7 @@ const Landing = () => {
             <div id="header" className="section flex flex-column">
                 <div className="header-menu-container flex align-items-center justify-content-between">
                     <button className="layout-topbar-logo p-link" onClick={() => history.push('/')}>
-                        <img src="assets/layout/images/logo2x.png" alt="ultima-layout" style={{ height: '24px' }} />
+                        <label>PORTAL</label>
                     </button>
 
                     <button id="menu-button" className="lg:hidden p-link" onClick={(event) => onMenuButtonClick(event)}>
