@@ -3,17 +3,17 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import ProjectService from '../../src/service/ProjectService';
-import Project from '../model/Project';
 import { InputText } from 'primereact/inputtext';
 import { Checkbox } from 'primereact/checkbox';
+import { Message } from 'primereact/message';
+
+import { Calendar } from 'primereact/calendar';
+ 
 
 
 const TableDemo = () => {
 
-    const [loading1, setLoading1] = useState(true);
-    const [loading2, setLoading2] = useState(true);
     const [proj, setProj] = useState(new Array());
-    const [expandedRows, setExpandedRows] = useState(null);
     const [project, setProject] = useState([]);
     const [selectedProject, setSelectedProject] = useState(project);
     const [updateProject, setUpdateProject] = useState(null);
@@ -40,13 +40,13 @@ const TableDemo = () => {
 
         getAll();
     }, [updateProjectById]);
-    //console.log(selectedProject)
+    
 
 
 
     const activeBody = (rowData) => {
-        let value = rowData.active.toString();
-        return <span className='customer-badge'>{value}</span>
+        let value = rowData.active;
+        return <span className='customer-badge'>{value ? "active" : "not active"}</span>
     }
     function deleteProjectById(event, id) {
         projectService.deleteProject(id)
@@ -55,6 +55,8 @@ const TableDemo = () => {
                 setProject([...project].filter(pro => pro.id !== id));
                 alert("project deleted.")
                 getAll();
+            }).catch((err)=>{
+                console.log(err+'Failed')
             });
     }
 
@@ -63,7 +65,10 @@ const TableDemo = () => {
             .then(pro => {
                 setUpdateProject(pro);
                 setProj([...proj]);
+                console.log(pro.statusText);
                 alert("project updated.")
+            }).catch((err)=>{
+                console.log(err+'Failed')
             });
     }
 
@@ -79,10 +84,11 @@ const TableDemo = () => {
     }
 
 
-    //console.log(selectedProject);
+    
 
     function handleInputChange(event) {
         const { name, value } = event.target;
+        console.log(value)
         let newProject = { ...selectedProject };
         if (name == "active") {
             setCheckboxValue(o => !o);
@@ -98,27 +104,29 @@ const TableDemo = () => {
     }
 
     return (
-        <div className="grid table-demo">
-            <div className="col-12">
+        <div className="grid justify-content-center align-items-center">
+            <div className="col-12 md:col-4">
                 <div className="card p-fluid">
                     <h5>Update Project</h5>
                     <div className="projectName">
-                        <label htmlFor="projectName">Project Name</label>
+                        <label className='col-fixed w-9rem' htmlFor="projectName">Project Name</label>
                         <InputText id="projectName" name='projectName'
                             type="text"
                             value={selectedProject.projectName}
                             onChange={(event) => handleInputChange(event)}
                         />
+                       
                     </div>
                     <div className="startDate">
-                        <label htmlFor="startDate">Start Date</label>
-                        <InputText name='startDate' value={selectedProject.startDate}
+                        <label className='col-fixed w-9rem' htmlFor="startDate">Start Date</label>
+                        
+                        <InputText className='p-inputtext' name='startDate' value={selectedProject.startDate}
                             type="date" id="startDate"
                             onChange={(event) => handleInputChange(event)} />
                     </div>
                     <div className="endDate">
-                        <label htmlFor="endDate">End Date</label>
-                        <InputText name='endDate' type="date" id='endDate' value={selectedProject.endDate} onChange={(event) => handleInputChange(event)} ></InputText>
+                        <label className='col-fixed w-9rem' htmlFor="endDate">End Date</label>
+                        <InputText className='p-inputtext' name='endDate' type="date" id='endDate' value={selectedProject.endDate} onChange={(event) => handleInputChange(event)} ></InputText>
                     </div>
                     <div className="offer">
                         <label htmlFor="offer">Offer</label>
@@ -127,10 +135,10 @@ const TableDemo = () => {
                     <div className="status">
 
                         <div className="grid">
-                            <div className="col-12 md:col-4">
-                                <div className="field-checkbox">
-                                    <Checkbox id='active' name="active" onChange={(event) => handleInputChange(event)} checked={checkboxValue}></Checkbox>
-                                    <label htmlFor="offer">Active</label>
+                            <div className="col-12 md:col-4 mt-2">
+                                <div className="field-checkbox  ">
+                                    <Checkbox  id='active' name="active" onChange={(event) => handleInputChange(event)} checked={checkboxValue}></Checkbox>
+                                    <label className='col-fixed w-9rem' htmlFor="offer">Active</label>
                                 </div>
                             </div>
                         </div>
@@ -142,7 +150,9 @@ const TableDemo = () => {
 
                     </div>
                 </div>
-                <div className="card">
+                
+            </div>
+            <div className="card">
                     <h5>Project List</h5>
                     <DataTable value={project} paginator className="p-datatable-gridlines" showGridlines rows={10}
                         dataKey="id" filterDisplay="menu" responsiveLayout="scroll"
@@ -154,16 +164,15 @@ const TableDemo = () => {
                             filter sortable />
                         <Column field="offer" filterPlaceholder="Search by Offer" header="Offer" filterField="offer" dataType="date" style={{ minWidth: '10rem' }}
                             filter sortable />
-                        <Column body={activeBody} field="active" header="Status" filterPlaceholder="Search by Is Active" filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '12rem' }} filter sortable />
-                        <div body={deleteItem} filter ></div>
+                        <Column data body={activeBody} field="active" header="Status" filterPlaceholder="Search by Is Active" filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '12rem' }} filter sortable />
                         <div body={updatededProject} filter />
+                        <div body={deleteItem} filter ></div>
+                        
                     </DataTable>
                     <div align="right" >
                         <Button label='Add Project' className='mr-2 mb-2'></Button>
                     </div>
                 </div>
-            </div>
-
 
         </div>
 

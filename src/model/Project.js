@@ -1,6 +1,6 @@
 export default class Project {
     constructor(pro = {
-        active : ["No", "Yes"],
+        active : false,
         description : "",
         endDate : "",
         offer:"",

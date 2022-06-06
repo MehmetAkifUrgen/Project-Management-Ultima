@@ -40,7 +40,7 @@ const AppTopbar = (props) => {
                     {
                         label: 'UI KIT 1',
                         items: [
-                            { label: 'Form Layout', icon: 'pi pi-fw pi-id-card', command: () => { history.push('/uikit/formlayout') } },
+                            { label: 'Add Project', icon: 'pi pi-fw pi-id-card', command: () => { history.push('/uikit/formlayout') } },
                             { label: 'Input', icon: 'pi pi-fw pi-check-square', command: () => { history.push('/uikit/input') } },
                             { label: 'Float Label', icon: 'pi pi-fw pi-bookmark', command: () => { history.push('/uikit/floatlabel') } },
                             { label: 'Button', icon: 'pi pi-fw pi-mobile', command: () => { history.push('/uikit/button') } },
