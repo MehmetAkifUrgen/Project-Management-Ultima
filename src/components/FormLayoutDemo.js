@@ -6,13 +6,14 @@ import { Button } from 'primereact/button';
 import { Checkbox } from 'primereact/checkbox';
 import { Message } from 'primereact/message';
 import { MultiSelect } from 'primereact/multiselect';
+import { setRef } from '@fullcalendar/core';
 
 const FormLayoutDemo = () => {
 
     const [active, setActive] = useState(false);
     let projectService = new ProjectService();
     const [multiselectValue, setMultiselectValue] = useState(null);
-    
+    let [required,setRequired]=useState(false);
 
 
 
@@ -25,6 +26,7 @@ const FormLayoutDemo = () => {
         setActive(false);
 
     }, [])
+   
 
     const multiselectValues = [
         { name: 'Australia', code: 'AU' },
@@ -55,13 +57,18 @@ const FormLayoutDemo = () => {
 
 
     function addProject(event) {
-        projectService.addProject({ ...project })
+        if(project.projectName.length < 1){
+            setRequired(o=> !o);
+        }
+        else{
+            projectService.addProject({ ...project })
             .then(response => {
                 // let pro = [...project];
                 // pro.push({ ...project });
                 // setProject(pro);
                 console.log(response);
             })
+        }
 
 
     }
@@ -99,7 +106,9 @@ const FormLayoutDemo = () => {
         else {
             newProject[name] = value;
         }
-        
+        if(newProject["projectName"].length > 0){
+            setRequired(false);
+        }
         
         setProject(newProject);
         console.log(project)
@@ -107,7 +116,7 @@ const FormLayoutDemo = () => {
 
     return (
         <div className="grid d-flex justify-content-center align-items-center">
-            <div className="col-12 md:col-6">
+            <div className="col-12 md:col-12">
                 <div className="card p-fluid">
                     <h5>Add Your Project</h5>
                     <div className="projectName">
@@ -117,7 +126,7 @@ const FormLayoutDemo = () => {
                             value={project.projectName}
                             onChange={(event) => handleInputChange(event)}
                         />
-                         {project.projectName.length <1 ? <Message   severity="error" text="Username is required" /> : null}
+                         {required && <Message   severity="error" text="Username is required" /> }
                     </div>
                     <div className="startDate">
                         <label htmlFor="startDate">Start Date</label>

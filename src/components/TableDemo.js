@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useCallback } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import ProjectService from '../../src/service/ProjectService';
 import { InputText } from 'primereact/inputtext';
 import { Checkbox } from 'primereact/checkbox';
-import { Message } from 'primereact/message';
-
-import { Calendar } from 'primereact/calendar';
+import { useHistory } from 'react-router-dom';
+import { confirmPopup } from 'primereact/confirmpopup';
  
 
 
@@ -19,6 +18,8 @@ const TableDemo = () => {
     const [updateProject, setUpdateProject] = useState(null);
     const [id, setId] = useState("");
     const [checkboxValue, setCheckboxValue] = useState(selectedProject.active);
+    let [visible,setVisible] = useState(false);
+    const history = useHistory();
 
 
 
@@ -39,7 +40,14 @@ const TableDemo = () => {
     useEffect(() => {
 
         getAll();
-    }, [updateProjectById]);
+        setVisible(false);
+    }, []);
+    useEffect(() => {
+
+        getAll();
+        setVisible(false);
+    }, [proj]);
+    
     
 
 
@@ -66,6 +74,7 @@ const TableDemo = () => {
                 setUpdateProject(pro);
                 setProj([...proj]);
                 console.log(pro.statusText);
+                setVisible(false);
                 alert("project updated.")
             }).catch((err)=>{
                 console.log(err+'Failed')
@@ -74,13 +83,31 @@ const TableDemo = () => {
 
     const deleteItem = (rowData) => {
 
-        return <i onClick={(event) => deleteProjectById(event, rowData.id)} className='pi pi-times' ></i>
+        return <i onClick={(event)=> confirm(event,rowData.id)}  className='pi pi-trash' style={{'fontSize' : "1.6em" , "color": "red"}} ></i>
     }
+
+    const confirm = (event,id) => {
+        confirmPopup({
+            target: event.currentTarget,
+            message: 'Are you sure you want to delete Project?',
+            icon: 'pi pi-exclamation-triangle',
+            accept: () => acceptFunc(event,id),
+            reject: () => rejectFunc()
+        });
+    }
+
+    function acceptFunc(event,id){
+        deleteProjectById(event, id)
+    }
+    function rejectFunc(){
+        return null;
+    }
+    
 
 
     const updatededProject = (rowData) => {
 
-        return <Button onClick={() => { setSelectedProject(rowData); setId(rowData.id); setCheckboxValue(rowData.active) }} label='Update' className='mr-2 mb-2'></Button>
+        return <Button onClick={() => { setSelectedProject(rowData); setId(rowData.id); setCheckboxValue(rowData.active); setVisible(p=> !p) }} label='Update' className='mr-2 mb-2'></Button>
     }
 
 
@@ -105,9 +132,12 @@ const TableDemo = () => {
 
     return (
         <div className="grid justify-content-center align-items-center">
-            <div className="col-12 md:col-4">
+            {visible && <div className="col-12 md:col-4">
                 <div className="card p-fluid">
+                    <div className='updateProjectHeader'>
                     <h5>Update Project</h5>
+                    <i className='p-button-icon p-c pi pi-times' onClick={()=> setVisible(false)} />
+                    </div>
                     <div className="projectName">
                         <label className='col-fixed w-9rem' htmlFor="projectName">Project Name</label>
                         <InputText id="projectName" name='projectName'
@@ -151,7 +181,7 @@ const TableDemo = () => {
                     </div>
                 </div>
                 
-            </div>
+            </div>}
             <div className="card">
                     <h5>Project List</h5>
                     <DataTable value={project} paginator className="p-datatable-gridlines" showGridlines rows={10}
@@ -170,7 +200,7 @@ const TableDemo = () => {
                         
                     </DataTable>
                     <div align="right" >
-                        <Button label='Add Project' className='mr-2 mb-2'></Button>
+                        <Button onClick={() => { history.push('/uikit/formlayout') }} label='Add Project' className='mr-2 mb-2'></Button>
                     </div>
                 </div>
 

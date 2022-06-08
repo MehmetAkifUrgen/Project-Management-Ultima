@@ -11,26 +11,19 @@ import AppConfig from './AppConfig';
 import AppRightMenu from './AppRightMenu';
 
 import Dashboard from './components/Dashboard';
-import DashboardAnalytics from './components/DashboardAnalytics';
-import ButtonDemo from './components/ButtonDemo';
-import ChartDemo from './components/ChartDemo';
-import MessagesDemo from './components/MessagesDemo';
-import Documentation from './components/Documentation';
-import FileDemo from './components/FileDemo';
+
+
 import FormLayoutDemo from './components/FormLayoutDemo';
-import InputDemo from './components/InputDemo';
-import ListDemo from './components/ListDemo';
-import MiscDemo from './components/MiscDemo';
+
 import MenuDemo from './components/MenuDemo';
-import OverlayDemo from './components/OverlayDemo';
+
 import PanelDemo from './components/PanelDemo';
 import TableDemo from './components/TableDemo';
-import TreeDemo from './components/TreeDemo';
-import FloatLabelDemo from './components/FloatLabelDemo';
-import InvalidStateDemo from './components/InvalidStateDemo';
 
-import BlocksDemo from './components/BlocksDemo';
-import IconsDemo from './utilities/IconsDemo';
+
+
+
+
 
 import Crud from './pages/Crud';
 import Calendar from './pages/Calendar';
@@ -93,109 +86,21 @@ const App = () => {
             label: 'UI Kit', icon: 'pi pi-fw pi-star-fill',
             items: [
                 { label: 'Add Project', icon: 'pi pi-fw pi-id-card', to: '/uikit/formlayout', badge: '6', badgeClassName: 'p-badge-warning' },
-                { label: 'Input', icon: 'pi pi-fw pi-check-square', to: '/uikit/input', badge: '6', badgeClassName: 'p-badge-danger' },
-                { label: 'Float Label', icon: 'pi pi-fw pi-bookmark', to: '/uikit/floatlabel' },
-                { label: 'Invalid State', icon: 'pi pi-fw pi-exclamation-circle', to: '/uikit/invalidstate' },
-                { label: 'Button', icon: 'pi pi-fw pi-mobile', to: '/uikit/button', className: 'rotated-icon' },
+
+
+
                 { label: 'Projects', icon: 'pi pi-fw pi-table', to: '/uikit/table', badge: '6', badgeClassName: 'p-badge-help' },
-                { label: 'List', icon: 'pi pi-fw pi-list', to: '/uikit/list' },
-                { label: 'Tree', icon: 'pi pi-fw pi-share-alt', to: '/uikit/tree' },
+
+
                 { label: 'Panel', icon: 'pi pi-fw pi-tablet', to: '/uikit/panel' },
-                { label: 'Overlay', icon: 'pi pi-fw pi-clone', to: '/uikit/overlay' },
+
                 { label: 'Menu', icon: 'pi pi-fw pi-bars', to: '/uikit/menu' },
-                { label: 'Message', icon: 'pi pi-fw pi-comment', to: '/uikit/message' },
-                { label: 'File', icon: 'pi pi-fw pi-file', to: '/uikit/file' },
-                { label: 'Chart', icon: 'pi pi-fw pi-chart-bar', to: '/uikit/chart' },
-                { label: 'Misc', icon: 'pi pi-fw pi-circle', to: '/uikit/misc' },
+
+
             ]
         },
-        {
-            label: "PrimeBlocks", icon: "pi pi-fw pi-prime",
-            items: [
-                { label: "Free Blocks", icon: "pi pi-fw pi-eye", to: "/primeblocks/blocks", badge: "NEW", badgeStyle: { width: '40px' } },
-                { label: "All Blocks", icon: "pi pi-fw pi-globe", url: "https://www.primefaces.org/primeblocks-react", target: "_blank" }
-            ]
-        },
-        {
-            label: 'Utilities', icon: 'pi pi-fw pi-compass',
-            items: [
-                { label: 'Icons', icon: 'pi pi-fw pi-prime', to: '/utilities/icons' },
-                { label: "PrimeFlex", icon: "pi pi-fw pi-desktop", url: "https://www.primefaces.org/primeflex", target: "_blank" }
-            ]
-        },
-        {
-            label: 'Pages', icon: 'pi pi-fw pi-briefcase',
-            items: [
-                { label: 'Crud', icon: 'pi pi-fw pi-pencil', to: '/pages/crud' },
-                { label: 'Calendar', icon: 'pi pi-fw pi-calendar-plus', to: '/pages/calendar' },
-                { label: 'Timeline', icon: 'pi pi-fw pi-calendar', to: '/pages/timeline' },
-                {
-                    label: 'Landing', icon: 'pi pi-fw pi-globe', badge: '2', badgeClassName: 'p-badge-warning',
-                    items: [
-                        { label: 'Static', icon: 'pi pi-fw pi-globe', url: 'assets/pages/landing.html', target: '_blank' },
-                        { label: 'Component', icon: 'pi pi-fw pi-globe', to: '/landing' }
-                    ]
-                }, { label: 'Login', icon: 'pi pi-fw pi-sign-in', to: '/login' },
-                { label: 'Invoice', icon: 'pi pi-fw pi-dollar', to: '/pages/invoice' },
-                { label: 'Help', icon: 'pi pi-fw pi-question-circle', to: '/pages/help' },
-                { label: 'Error', icon: 'pi pi-fw pi-times-circle', to: '/error' },
-                { label: 'Not Found', icon: 'pi pi-fw pi-exclamation-circle', to: '/notfound' },
-                { label: 'Access Denied', icon: 'pi pi-fw pi-lock', to: '/access' },
-                { label: 'Empty Page', icon: 'pi pi-fw pi-circle', to: '/pages/empty' }
-            ]
-        },
-        {
-            label: 'Hierarchy', icon: 'pi pi-fw pi-align-left',
-            items: [
-                {
-                    label: 'Submenu 1', icon: 'pi pi-fw pi-align-left',
-                    items: [
-                        {
-                            label: 'Submenu 1.1', icon: 'pi pi-fw pi-align-left',
-                            items: [
-                                { label: 'Submenu 1.1.1', icon: 'pi pi-fw pi-align-left' },
-                                { label: 'Submenu 1.1.2', icon: 'pi pi-fw pi-align-left' },
-                                { label: 'Submenu 1.1.3', icon: 'pi pi-fw pi-align-left' },
-                            ]
-                        },
-                        {
-                            label: 'Submenu 1.2', icon: 'pi pi-fw pi-align-left',
-                            items: [
-                                { label: 'Submenu 1.2.1', icon: 'pi pi-fw pi-align-left' },
-                                { label: 'Submenu 1.2.2', icon: 'pi pi-fw pi-align-left' }
-                            ]
-                        },
-                    ]
-                },
-                {
-                    label: 'Submenu 2', icon: 'pi pi-fw pi-align-left',
-                    items: [
-                        {
-                            label: 'Submenu 2.1', icon: 'pi pi-fw pi-align-left',
-                            items: [
-                                { label: 'Submenu 2.1.1', icon: 'pi pi-fw pi-align-left' },
-                                { label: 'Submenu 2.1.2', icon: 'pi pi-fw pi-align-left' },
-                                { label: 'Submenu 2.1.3', icon: 'pi pi-fw pi-align-left' },
-                            ]
-                        },
-                        {
-                            label: 'Submenu 2.2', icon: 'pi pi-fw pi-align-left',
-                            items: [
-                                { label: 'Submenu 2.2.1', icon: 'pi pi-fw pi-align-left' },
-                                { label: 'Submenu 2.2.2', icon: 'pi pi-fw pi-align-left' }
-                            ]
-                        },
-                    ]
-                }
-            ]
-        },
-        {
-            label: 'Start', icon: 'pi pi-fw pi-download',
-            items: [
-                { label: 'Documentation', icon: 'pi pi-fw pi-question', to: '/start/documentation' },
-                { label: 'Buy Now', icon: 'pi pi-fw pi-shopping-cart', command: () => { window.location = "https://www.primefaces.org/store" } }
-            ]
-        }
+        
+        
     ];
 
     const routes = [
@@ -520,25 +425,19 @@ const App = () => {
 
                     <div className="layout-content">
                         <Route path="/" exact render={() => <Dashboard colorMode={colorMode} isNewThemeLoaded={newThemeLoaded} onNewThemeChange={e => setNewThemeLoaded(e)} location={location} />} />
-                        <Route path="/start/documentation" component={Documentation} />
-                        <Route path="/favorites/dashboardanalytics" render={() => <DashboardAnalytics colorMode={colorMode} isNewThemeLoaded={newThemeLoaded} onNewThemeChange={e => setNewThemeLoaded(e)} location={location} />} />
+
+
                         <Route path="/uikit/formlayout" component={FormLayoutDemo} />
-                        <Route path="/uikit/floatlabel" component={FloatLabelDemo} />
-                        <Route path="/uikit/input" component={InputDemo} />
-                        <Route path="/uikit/invalidstate" component={InvalidStateDemo} />
-                        <Route path="/uikit/button" component={ButtonDemo} />
+
                         <Route path="/uikit/table" component={TableDemo} />
-                        <Route path="/uikit/list" component={ListDemo} />
-                        <Route path="/uikit/tree" component={TreeDemo} />
+
                         <Route path="/uikit/panel" component={PanelDemo} />
-                        <Route path="/uikit/overlay" component={OverlayDemo} />
+
                         <Route path="/uikit/menu" component={MenuDemo} />
-                        <Route path="/uikit/message" component={MessagesDemo} />
-                        <Route path="/uikit/file" component={FileDemo} />
-                        <Route path="/uikit/chart" render={() => <ChartDemo colorMode={colorMode} isNewThemeLoaded={newThemeLoaded} onNewThemeChange={e => setNewThemeLoaded(e)} location={location} />} />
-                        <Route path="/uikit/misc" component={MiscDemo} />
-                        <Route path="/primeblocks/blocks" component={BlocksDemo} />
-                        <Route path="/utilities/icons" component={IconsDemo} />
+
+
+
+
                         <Route path="/pages/crud" component={Crud} />
                         <Route path="/pages/calendar" component={Calendar} />
                         <Route path="/pages/help" component={Help} />

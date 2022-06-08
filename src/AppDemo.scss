@@ -5,6 +5,11 @@
 		display: none;
 	}
 }
+.updateProjectHeader{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 
 .carousel-demo {
 	.p-carousel {
