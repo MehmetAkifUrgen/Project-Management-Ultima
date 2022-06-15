@@ -117,7 +117,7 @@ const FormLayoutDemo = () => {
     return (
         <div className="grid d-flex justify-content-center align-items-center">
             <div className="col-12 md:col-12">
-                <div className="card p-fluid">
+                <div className="card p-fluid"  >
                     <h5>Add Your Project</h5>
                     <div className="projectName">
                         <label htmlFor="projectName">Project Name</label>
@@ -150,8 +150,8 @@ const FormLayoutDemo = () => {
                             <label htmlFor="offer">Active</label>
                         </div>
                     </div>
-                    <div className='addButtonDiv'>
-                        <Button onClick={addProject} className='project-button justify-content-center'>
+                    <div   >
+                        <Button onClick={addProject} className='project-button justify-content-center w-25'>
                             Save
                         </Button>
 
